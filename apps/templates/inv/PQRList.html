@@ -1,0 +1,58 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <a href="{% url 'pqr_index' %}" class="btn btn-primary pull-right">Crear Pregunta</a>
+                    <h4 class="card-title">Preguntas, Quejas y/ Reclamos</h4>
+                </div>
+                <div class="card-header">
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags %}
+                            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <i class="material-icons">close</i>
+                                </button>
+                                <span>{{ message }}</span>
+                          </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <th>#</th>
+                                <th>Tipo de solicitud</th>
+                                <th>Descripción</th>
+                            </thead>
+                            <tbody>
+                            {% for pqr in pqrs %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ pqr.get_request_type_display }}</td>
+                                <td>{{ pqr.description }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
