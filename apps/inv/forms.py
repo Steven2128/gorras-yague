@@ -1,7 +1,5 @@
 # Django
 from django import forms
-# Crispy Forms
-from crispy_forms.helper import FormHelper
 # Models
 from .models import *
 
@@ -17,7 +15,16 @@ class PQRForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'placeholder': 'Describe tu solicitud aquí...'})
         }
 
+
+class ProductForm(forms.ModelForm):
+    """Product Form"""
+    class Meta:
+        model = Product
+        exclude = ['category']
+
     def __init__(self, *args, **kwargs):
-        super(PQRForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_show_labels = False
+        super().__init__(*args, **kwargs)
+
+        self.fields['brand'].empty_label = 'Seleccione marca'
+        self.fields['brand'].widget.attrs['class'] = 'form-control'
+

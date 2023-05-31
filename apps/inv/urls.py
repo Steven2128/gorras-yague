@@ -4,6 +4,8 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('create/', PQRCreateView.as_view(), name='pqr_index'),
-    path('', PQRListView.as_view(), name='pqr_list'),
+    path('pqr/create/', PQRCreateView.as_view(), name='pqr_create'),
+    path('pqrs/', PQRListView.as_view(), name='pqr_list'),
+    path('products/', ProductListView.as_view(), name='product_list'),
+    path('product/create', ProductCreateView.as_view(), name='product_create'),
 ]

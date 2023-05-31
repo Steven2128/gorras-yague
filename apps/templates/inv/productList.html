@@ -11,8 +11,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header card-header-primary">
-                    <a href="{% url 'pqr_create' %}" class="btn btn-primary pull-right">Crear Pregunta</a>
-                    <h4 class="card-title">Preguntas, Quejas y/ Reclamos</h4>
+                    <a href="{% url 'product_create' %}" class="btn btn-primary pull-right">Crear producto</a>
+                    <h4 class="card-title">Productos</h4>
                 </div>
                 <div class="card-header">
                 {% if messages %}
@@ -29,19 +29,38 @@
                 {% endif %}
                 </div>
                 <div class="card-body">
+                    <form method="GET">
+                        <div class="form-row">
+                            <div class="col-6">
+                                <h5>Filtrar por talla:</h5>
+                                <input type="text" name="size" placeholder="Talla" class="form-control">
+                                <button type="submit" class="btn btn-primary pull-left">Aplicar Filtro<div class="ripple-container"></div></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
                                 <th>#</th>
-                                <th>Tipo de solicitud</th>
                                 <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Talla</th>
+                                <th>Color</th>
+                                <th>Stock</th>
+                                <th>Marca</th>
                             </thead>
                             <tbody>
-                            {% for pqr in pqrs %}
+                            {% for product in products %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
-                                <td>{{ pqr.get_request_type_display }}</td>
-                                <td>{{ pqr.description }}</td>
+                                <td>{{ product.description }}</td>
+                                <td>{{ product.price }}</td>
+                                <td>{{ product.size }}</td>
+                                <td>{{ product.color }}</td>
+                                <td>{{ product.stock }}</td>
+                                <td>{{ product.brand }}</td>
                             </tr>
                             {% endfor %}
                             </tbody>

@@ -10,7 +10,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header card-header-primary">
-                    <h4 class="card-title">Pregunta, Queja y/o Reclamo</h4>
+                    <h4 class="card-title">Crear Producto</h4>
                 </div>
                 <div class="card-header">
                 {% if messages %}
@@ -25,24 +25,43 @@
                         {% endif %}
                     {% endfor %}
                 {% endif %}
+                {{ form.errors }}
                 </div>
                 <div class="card-body">
-                    <form method="post">
+                    <form method="post" autocomplete="off">
                         {% csrf_token %}
                         <div class="row">
-                            <div class="col-lg-12 col-md-6 col-sm-6 mb-2">
-                                <h5>Tipo de solicitud</h5>
-                                <select class="form-control" name="request_type" aria-label="Default select example" required>
-                                    <option selected>Seleccione una opción</option>
-                                    <option value="P">Pregunta</option>
-                                    <option value="Q">Queja</option>
-                                    <option value="R">Reclamo</option>
-                                </select>
+                            <div class="col-lg-8 col-md-6 col-sm-6 mb-2">
+                                <h5>Descripción del producto</h5>
+                                <input type="text" class="form-control" name="description" placeholder="Descripción" required>
+                            </div>
+                            <div class="col-lg-4">
+                                <h5>Marca</h5>
+                                {{ form.brand }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5>Precio</h5>
+                                <input type="text" class="form-control" name="price" placeholder="Precio" required>
+                            </div>
+                            <div class="col-lg-6">
+                                <h5>Talla</h5>
+                                <input type="text" class="form-control" name="size" placeholder="Talla" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5>Color</h5>
+                                <input type="text" class="form-control" name="color" placeholder="Color" required>
+                            </div>
+                            <div class="col-lg-6">
+                                <h5>Stock</h5>
+                                <input type="number" class="form-control" name="stock" placeholder="Stock" min="1" required>
                             </div>
                             <div class="col-lg-12">
-                                <h5>Detalle de la solicitud</h5>
-                                <textarea class="form-control" rows="5" name="description" placeholder="Descripción de la solicitud..." required></textarea>
-                                <button type="submit" class="btn btn-primary pull-right">Enviar Solicitud
+{#                                <input type="hidden" name="category" value="1">#}
+                                <button type="submit" class="btn btn-primary pull-right">Guardar producto
                                     <div class="ripple-container"></div>
                                 </button>
                             </div>
